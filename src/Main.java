@@ -1,3 +1,5 @@
+import com.sun.jdi.NativeMethodException;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
@@ -7,21 +9,23 @@ import java.util.Scanner;
 public class Main {
     public static void main(String[] args) {
 
+
         Scanner scan = new Scanner(System.in);
 
         System.out.println("Quanti libri vuoi popolare?");
 
         int booksNumber = 0;
         try {
-            booksNumber = Integer.parseInt(scan.nextLine());
-            if (booksNumber < 1) {
-                throw new IllegalArgumentException();
-            }
-        } catch (IllegalArgumentException e) {
-            System.out.println("Input non valido, devi inserire un numero positivo");
+            int getNumber = Integer.parseInt(scan.nextLine());
+            if (getNumber < 1) {
+                System.out.println("Input non valido, devi inserire un numero ");
+            } else booksNumber = getNumber;
+        } catch (NumberFormatException e) {
+            System.out.println(e.getMessage());
         }
 
         Book[] bookArr = new Book[booksNumber];
+
 
         for (int i = 0; i < bookArr.length; i++) {
 
