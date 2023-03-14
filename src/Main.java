@@ -18,10 +18,10 @@ public class Main {
         try {
             int getNumber = Integer.parseInt(scan.nextLine());
             if (getNumber < 1) {
-                System.out.println("Input non valido, devi inserire un numero ");
+                System.out.println("Input non valido, devi inserire un numero positivo");
             } else booksNumber = getNumber;
         } catch (NumberFormatException e) {
-            System.out.println(e.getMessage());
+            System.out.println("input non valido, deve essere un numero");
         }
 
         Book[] bookArr = new Book[booksNumber];
