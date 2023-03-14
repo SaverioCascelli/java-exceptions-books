@@ -1,3 +1,7 @@
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.Scanner;
 
 public class Main {
@@ -55,8 +59,46 @@ public class Main {
             } while (!bookDone);
         }
 
-        for (int i = 0; i < bookArr.length; i++) {
-            System.out.println(bookArr[i]);
+        scan.close();
+
+        FileWriter fw = null;
+        try {
+            fw = new FileWriter("./dump.txt");
+            for (Book book : bookArr) {
+                fw.write(book.toString() + "\n");
+            }
+        } catch (IOException e) {
+            System.out.println(e.getMessage());
+        } finally {
+            if (fw != null) {
+                try {
+                    fw.close();
+                } catch (IOException e) {
+                    System.out.println(e.getMessage());
+                }
+            }
+        }
+
+        File myFile = new File("./dump.txt");
+
+        Scanner reader = null;
+        try {
+            reader = new Scanner(myFile);
+            while (reader.hasNextLine()) {
+                String data = reader.nextLine();
+                System.out.println(data);
+            }
+        } catch (FileNotFoundException e) {
+            System.out.println("file non trovato");
+            System.out.println(e.getMessage());
+        } finally {
+            if (reader != null) {
+                try {
+                    reader.close();
+                } catch (IllegalStateException e) {
+                    System.out.println(e.getMessage());
+                }
+            }
         }
 
 
